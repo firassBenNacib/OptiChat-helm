@@ -1,0 +1,26 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "myapp.fullname" . }}-scaledobject
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "myapp.fullname" . }}
+  pollingInterval: {{ .Values.scaling.pollingInterval }}
+  cooldownPeriod: {{ .Values.scaling.cooldownPeriod }}
+  minReplicaCount: {{ .Values.scaling.minReplicaCount }}
+  maxReplicaCount: {{ .Values.scaling.maxReplicaCount }}
+  triggers:
+    - type: prometheus
+      metadata:
+        serverAddress: {{ .Values.prometheus.serverAddress }}
+        metricName: '{{ index .Values.scaling.prometheusTriggers 0 "metricName" }}'
+        query: '{{ index .Values.scaling.prometheusTriggers 0 "query" }}'
+        threshold: '{{ index .Values.scaling.prometheusTriggers 0 "threshold" }}'
+    - type: prometheus
+      metadata:
+        serverAddress: {{ .Values.prometheus.serverAddress }}
+        metricName: '{{ index .Values.scaling.prometheusTriggers 1 "metricName" }}'
+        query: '{{ index .Values.scaling.prometheusTriggers 1 "query" }}'
+        threshold: '{{ index .Values.scaling.prometheusTriggers 1 "threshold" }}'
