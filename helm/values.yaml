@@ -1,6 +1,6 @@
 image:
   repository: firaskill12/kube-keda
-  tag: 394393387384372370
+  tag: 396394393387384372370
 
 service:
   type: ClusterIP
