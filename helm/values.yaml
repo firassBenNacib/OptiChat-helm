@@ -1,1 +1,25 @@
-tag: 397
+image:
+  repository: firaskill12/kube-keda
+  tag: 396394393387384372370
+
+service:
+  type: ClusterIP
+  port: 8082
+
+prometheus:
+  serverAddress: http://10.110.96.5:9090
+
+scaling:
+  pollingInterval: 5
+  cooldownPeriod: 30
+  minReplicaCount: 1
+  maxReplicaCount: 10
+  prometheusTriggers:
+    - type: prometheus
+      metricName: myapp_traffic_gauge
+      query: sum(myapp_traffic_gauge)
+      threshold: '5'
+    - type: prometheus
+      metricName: myapp_http_requests_counter
+      query: sum(rate(myapp_http_requests_counter[1m]))
+      threshold: '1'
