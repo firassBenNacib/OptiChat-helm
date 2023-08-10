@@ -1,6 +1,6 @@
 image:
   repository: firaskill12/kube-keda
-  tag: 396394393387384372370
+  tag: latest
 
 service:
   type: ClusterIP
@@ -9,17 +9,26 @@ service:
 prometheus:
   serverAddress: http://10.110.96.5:9090
 
+activemq:
+  managementEndpoint: "activemq-service:8161"
+
 scaling:
   pollingInterval: 5
-  cooldownPeriod: 30
+  cooldownPeriod: 10
   minReplicaCount: 1
   maxReplicaCount: 10
   prometheusTriggers:
     - type: prometheus
-      metricName: myapp_traffic_gauge
-      query: sum(myapp_traffic_gauge)
-      threshold: '5'
-    - type: prometheus
-      metricName: myapp_http_requests_counter
-      query: sum(rate(myapp_http_requests_counter[1m]))
+      metricName: active_processing_messages
+      query: sum(active_processing_messages)
       threshold: '1'
+      cooldownPeriod: '10'
+  activemqTriggers:
+    - type: activemq
+      destinationName: "message Queue"
+      brokerName: "localhost"
+      targetQueueSize: "1000"  
+      activationTargetQueueSize: "1000"  
+      cooldownPeriod: "10"   
+      username: "admin"
+      password: "admin"  

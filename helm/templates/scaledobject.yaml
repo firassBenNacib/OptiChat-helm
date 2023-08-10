@@ -18,9 +18,14 @@ spec:
         metricName: '{{ index .Values.scaling.prometheusTriggers 0 "metricName" }}'
         query: '{{ index .Values.scaling.prometheusTriggers 0 "query" }}'
         threshold: '{{ index .Values.scaling.prometheusTriggers 0 "threshold" }}'
-    - type: prometheus
+        cooldownPeriod: '{{ index .Values.scaling.prometheusTriggers 0 "cooldownPeriod" }}'
+    - type: activemq
       metadata:
-        serverAddress: {{ .Values.prometheus.serverAddress }}
-        metricName: '{{ index .Values.scaling.prometheusTriggers 1 "metricName" }}'
-        query: '{{ index .Values.scaling.prometheusTriggers 1 "query" }}'
-        threshold: '{{ index .Values.scaling.prometheusTriggers 1 "threshold" }}'
+        managementEndpoint: {{ .Values.activemq.managementEndpoint }}
+        destinationName: '{{ index .Values.scaling.activemqTriggers 0 "destinationName" }}'
+        brokerName: '{{ index .Values.scaling.activemqTriggers 0 "brokerName" }}'
+        targetQueueSize: '{{ index .Values.scaling.activemqTriggers 0 "targetQueueSize" }}'  
+        activationTargetQueueSize: '{{ index .Values.scaling.activemqTriggers 0 "activationTargetQueueSize" }}'  
+        cooldownPeriod: '{{ index .Values.scaling.activemqTriggers 0 "cooldownPeriod" }}'   
+        username: '{{ index .Values.scaling.activemqTriggers 0 "username" }}'
+        password: '{{ index .Values.scaling.activemqTriggers 0 "password" }}'
