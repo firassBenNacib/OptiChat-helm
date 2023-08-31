@@ -23,3 +23,15 @@ spec:
               value: "prometheus"
             - name: MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS
               value: "always"
+            - name: REPLICA_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          volumeMounts:   
+            - name: data-volume
+              mountPath: /app/data
+      volumes:              
+        - name: data-volume
+          hostPath:
+            path: /run/desktop/mnt/host/c/Users/MSI/OneDrive/Bureau/message_datasets
+            type: DirectoryOrCreate
