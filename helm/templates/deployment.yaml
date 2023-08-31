@@ -29,9 +29,9 @@ spec:
                   fieldPath: metadata.name
           volumeMounts:   
             - name: data-volume
-              mountPath: /app/data
+              mountPath:  {{ .Values.volume.mountPath }}
       volumes:              
         - name: data-volume
           hostPath:
-            path: /run/desktop/mnt/host/c/Users/MSI/OneDrive/Bureau/message_datasets
+            path: {{ .Values.volume.hostPath }}
             type: DirectoryOrCreate

@@ -2,6 +2,10 @@ image:
   repository: firaskill12/kube-keda
   tag: 427
 
+volume:
+  mountPath: /app/data
+  hostPath: /run/desktop/mnt/host/c/Users/MSI/OneDrive/Bureau/message_datasets
+
 service:
   type: ClusterIP
   port: 8082
@@ -32,3 +36,4 @@ scaling:
       cooldownPeriod: "10"   
       username: "admin"
       password: "admin"  
+  
