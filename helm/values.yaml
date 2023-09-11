@@ -1,6 +1,6 @@
 image:
   repository: firaskill12/kube-keda
-  tag: 459
+  tag: 460
 
 volume:
   mountPath: /app/data
