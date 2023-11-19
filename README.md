@@ -1,2 +1,2 @@
 # appfor-helm
- a helm chart for my appfor project
+ a helm chart for OptiChat project
