@@ -35,5 +35,12 @@ scaling:
       activationTargetQueueSize: "1000"  
       cooldownPeriod: "10"   
       username: "admin"
-      password: "admin"  
-  
+      password: "admin"
+
+resources:
+  limits:
+    cpu: "200m"
+    memory: "512Mi"
+  requests:
+    cpu: "100m"
+    memory: "256Mi"
