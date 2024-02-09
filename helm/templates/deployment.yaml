@@ -3,15 +3,15 @@ kind: Deployment
 metadata:
   name: {{ include "myapp.fullname" . }}
   labels:
-    {{- include "myapp.labels" . | nindent 4 }}
+    app: myapp
 spec:
   selector:
     matchLabels:
-      {{- include "myapp.selectorLabels" . | nindent 6 }}
+      app: myapp
   template:
     metadata:
       labels:
-        {{- include "myapp.selectorLabels" . | nindent 8 }}
+        app: myapp
     spec:
       containers:
         - name: myapp
@@ -27,11 +27,9 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:   
             - name: data-volume
-              mountPath: {{ .Values.volume.mountPath }}
+              mountPath:  {{ .Values.volume.mountPath }}
       volumes:              
         - name: data-volume
           hostPath:
