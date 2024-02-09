@@ -31,16 +31,9 @@ scaling:
     - type: activemq
       destinationName: "message Queue"
       brokerName: "localhost"
-      targetQueueSize: "100000"
-      activationTargetQueueSize: "1000"
-      cooldownPeriod: "10"
+      targetQueueSize: "100000"  
+      activationTargetQueueSize: "1000"  
+      cooldownPeriod: "10"   
       username: "admin"
-      password: "admin"
-
-resources:
-  limits:
-    cpu: "200m"
-    memory: "512Mi"
-  requests:
-    cpu: "100m"
-    memory: "256Mi"
+      password: "admin"  
+  
