@@ -27,9 +27,11 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:   
             - name: data-volume
-              mountPath:  {{ .Values.volume.mountPath }}
+              mountPath: {{ .Values.volume.mountPath }}
       volumes:              
         - name: data-volume
           hostPath:
